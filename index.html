@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>82-0 · Bygg den perfekte NBA-femmeren</title>
+  <meta name="description" content="82-0 er et gratis basketspill der du bygger din perfekte NBA-startfemmer og finner ut om laget kan gå 82-0 gjennom en hel grunnserie. Spinn for ekte lag og sesonger, draft spiller for spiller, og se din projiserte rekord." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">82<span class="brand-dash">-</span>0</span>
+      <span class="brand-sub">NBA</span>
+    </div>
+    <nav class="steps" aria-label="Fremdrift">
+      <span class="step" data-step="mode">1 · Modus</span>
+      <span class="step" data-step="lineup">2 · Oppstilling</span>
+      <span class="step" data-step="draft">3 · Draft</span>
+      <span class="step" data-step="result">4 · Resultat</span>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <!-- STEP 1 + 2: SETUP -->
+    <section id="setup" class="screen active">
+      <div class="hero">
+        <h1>Kan din femmer gå <span class="accent">82-0?</span></h1>
+        <p class="lede">Bygg din drømme-startfemmer. Spinn for ekte NBA-lag og sesonger, draft én spiller per posisjon, og se om laget ditt kan vinne alle 82 kampene i grunnserien.</p>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">1 · Velg modus</h2>
+        <div class="cards" id="mode-cards">
+          <button class="choice selected" data-mode="classic">
+            <span class="choice-title">Classic</span>
+            <span class="choice-desc">Fulle stats og overall-rating er synlige. Draft det sterkeste laget du kan.</span>
+          </button>
+          <button class="choice" data-mode="expert">
+            <span class="choice-title">Expert</span>
+            <span class="choice-desc">Rating og stats er skjult — kun navn og posisjon. For ekte basketkjennere.</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-title">2 · Velg oppstilling</h2>
+        <div class="cards lineups" id="lineup-cards">
+          <button class="choice selected" data-lineup="traditional">
+            <span class="choice-title">Tradisjonell</span>
+            <span class="choice-slots">PG · SG · SF · PF · C</span>
+            <span class="choice-desc">Klassisk balansert femmer.</span>
+          </button>
+          <button class="choice" data-lineup="smallball">
+            <span class="choice-title">Small Ball</span>
+            <span class="choice-slots">PG · SG · SG · SF · PF</span>
+            <span class="choice-desc">Tre guards, fart og skyting.</span>
+          </button>
+          <button class="choice" data-lineup="twintowers">
+            <span class="choice-title">Twin Towers</span>
+            <span class="choice-slots">PG · SG · SF · C · C</span>
+            <span class="choice-desc">To bigs, dominans i feltet.</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-primary big" id="start-btn">Start draften →</button>
+    </section>
+
+    <!-- STEP 3: DRAFT -->
+    <section id="draft" class="screen">
+      <div class="draft-grid">
+        <div class="draft-left">
+          <div class="round-head">
+            <span id="round-label">Runde 1 / 5</span>
+            <span class="mode-pill" id="mode-pill">Classic</span>
+          </div>
+
+          <div class="spinner" id="spinner">
+            <div class="reel">
+              <div class="reel-team" id="reel-team">???</div>
+              <div class="reel-year" id="reel-year">····</div>
+            </div>
+            <button class="btn-primary" id="spin-btn">SPINN</button>
+            <p class="spin-hint" id="spin-hint">Spinn for å trekke et lag og en sesong, og draft så en spiller.</p>
+          </div>
+
+          <div class="pool" id="pool" hidden>
+            <h3 class="pool-title"><span id="pool-team"></span></h3>
+            <div class="pool-list" id="pool-list"></div>
+            <button class="btn-ghost" id="respin-btn">↺ Spinn nytt lag</button>
+          </div>
+        </div>
+
+        <aside class="draft-right">
+          <h3 class="court-title">Din femmer</h3>
+          <div class="court" id="court"></div>
+          <button class="btn-primary" id="finish-btn" disabled>Se resultatet →</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- STEP 4: RESULT -->
+    <section id="result" class="screen">
+      <div class="result-card">
+        <p class="result-kicker">Projisert grunnserie</p>
+        <h2 class="record" id="record">0 – 0</h2>
+        <p class="record-sub" id="record-sub">W · L over 82 kamper</p>
+        <div class="tier" id="tier">—</div>
+
+        <div class="result-stats">
+          <div class="rstat"><span class="rstat-label">Lagrating</span><span class="rstat-val" id="team-rating">—</span></div>
+          <div class="rstat"><span class="rstat-label">MVP</span><span class="rstat-val" id="mvp">—</span></div>
+          <div class="rstat"><span class="rstat-label">Toppscorer</span><span class="rstat-val" id="scorer">—</span></div>
+        </div>
+
+        <div class="final-five" id="final-five"></div>
+
+        <div class="result-actions">
+          <button class="btn-ghost" id="share-btn">Del resultat</button>
+          <button class="btn-primary" id="again-btn">Bygg en ny femmer</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="about">
+    <h2>Om 82-0</h2>
+    <p><strong>82-0</strong> er et gratis basketspill der du bygger den perfekte NBA-startfemmeren og finner ut om den kan gå en hel grunnserie ubeseiret — 82 kamper, 82 seire, null tap. Spinn for ekte lag og sesonger, draft laget ditt spiller for spiller, og se hvordan drømmefemmeren din står seg gjennom en full sesong.</p>
+    <h3>Slik fungerer det</h3>
+    <ol>
+      <li><strong>Velg modus og oppstilling</strong> — bestem hvordan du vil spille og formen på laget.</li>
+      <li><strong>Spinn</strong> for å trekke et tilfeldig NBA-lag og en sesong.</li>
+      <li><strong>Draft én spiller</strong> fra den troppen inn i en ledig posisjon.</li>
+      <li><strong>Gjenta i 5 runder</strong> til alle posisjonene er fylt.</li>
+      <li><strong>Få din projiserte 82-kampers rekord</strong> og se hvilket nivå femmeren din havner på.</li>
+    </ol>
+    <h3>82-0-utfordringen</h3>
+    <p>Ingen klubb har noen gang gått 82-0 i NBA-historien. Golden State Warriors satte rekord med 73-9 i 2015-16, og «72-10»-Bulls fra 1995-96 regnes som et av tidenes beste lag — men begge tapte kamper. En feilfri 82-0 er det ultimate: du trenger eliterating i hver eneste posisjon og null uflaks. Det er mulig i spillet, men bevisst brutalt vanskelig.</p>
+    <p class="disclaimer">82-0 er et uoffisielt fanspill, ikke tilknyttet eller godkjent av NBA eller noen klubb. Kun for underholdning.</p>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
