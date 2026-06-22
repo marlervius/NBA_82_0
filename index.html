@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>82-0 · Bygg den perfekte NBA-femmeren</title>
   <meta name="description" content="82-0 er et gratis basketspill der du bygger din perfekte NBA-startfemmer og finner ut om laget kan gå 82-0 gjennom en hel grunnserie. Spinn for ekte lag og sesonger, draft spiller for spiller, og se din projiserte rekord." />
+  <meta name="theme-color" content="#0a0e1a" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="82-0 · Bygg den perfekte NBA-femmeren" />
+  <meta property="og:description" content="Bygg din drømme-NBA-femmer og se om den kan gå 82-0 gjennom en hel grunnserie. Gratis i nettleseren." />
+  <meta property="og:locale" content="nb_NO" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="82-0 · NBA draft-spill" />
+  <meta name="twitter:description" content="Spinn for ekte lag og sesonger. Draft din femmer. Kan du gå 82-0?" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0e1a'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='28' font-weight='bold' fill='%23ff5a3c' text-anchor='middle'%3E82%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -41,7 +50,7 @@
           </button>
           <button class="choice" data-mode="expert">
             <span class="choice-title">Expert</span>
-            <span class="choice-desc">Rating og stats er skjult — kun navn og posisjon. For ekte basketkjennere.</span>
+            <span class="choice-desc">Rating og stats er skjult under draft — alt avsløres på resultatskjermen.</span>
           </button>
         </div>
       </div>
@@ -80,7 +89,8 @@
           </div>
 
           <div class="spinner" id="spinner">
-            <div class="reel">
+            <div class="reel" id="reel">
+              <span class="team-badge" id="reel-badge" hidden aria-hidden="true"></span>
               <div class="reel-team" id="reel-team">???</div>
               <div class="reel-year" id="reel-year">····</div>
             </div>
@@ -89,9 +99,12 @@
           </div>
 
           <div class="pool" id="pool" hidden>
-            <h3 class="pool-title"><span id="pool-team"></span></h3>
+            <div class="pool-head">
+              <span class="team-badge" id="pool-badge" hidden aria-hidden="true"></span>
+              <h3 class="pool-title"><span id="pool-team"></span></h3>
+            </div>
             <div class="pool-list" id="pool-list"></div>
-            <button class="btn-ghost" id="respin-btn">↺ Spinn nytt lag</button>
+            <button class="btn-ghost" id="respin-btn">↺ Spinn nytt lag <span id="respin-count">(1 igjen)</span></button>
           </div>
         </div>
 
@@ -115,6 +128,11 @@
           <div class="rstat"><span class="rstat-label">Lagrating</span><span class="rstat-val" id="team-rating">—</span></div>
           <div class="rstat"><span class="rstat-label">MVP</span><span class="rstat-val" id="mvp">—</span></div>
           <div class="rstat"><span class="rstat-label">Toppscorer</span><span class="rstat-val" id="scorer">—</span></div>
+        </div>
+
+        <div id="expert-reveal-banner" class="expert-reveal-banner" hidden>
+          <span class="reveal-icon">🔓</span>
+          <span>Expert-avsløring — stats og rating avdekkes nå</span>
         </div>
 
         <div class="final-five" id="final-five"></div>
@@ -142,6 +160,19 @@
     <p>Ingen klubb har noen gang gått 82-0 i NBA-historien. Golden State Warriors satte rekord med 73-9 i 2015-16, og «72-10»-Bulls fra 1995-96 regnes som et av tidenes beste lag — men begge tapte kamper. En feilfri 82-0 er det ultimate: du trenger eliterating i hver eneste posisjon og null uflaks. Det er mulig i spillet, men bevisst brutalt vanskelig.</p>
     <p class="disclaimer">82-0 er et uoffisielt fanspill, ikke tilknyttet eller godkjent av NBA eller noen klubb. Kun for underholdning.</p>
   </section>
+
+  <!-- Position picker modal -->
+  <div id="slot-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="slot-modal-title">
+    <div class="modal-backdrop" id="slot-modal-backdrop"></div>
+    <div class="modal-box">
+      <h3 class="modal-title" id="slot-modal-title">Velg posisjon</h3>
+      <p class="modal-desc" id="slot-modal-desc"></p>
+      <div class="modal-choices" id="slot-modal-choices"></div>
+      <button class="btn-ghost modal-cancel" id="slot-modal-cancel" type="button">Avbryt</button>
+    </div>
+  </div>
+
+  <div id="spin-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
